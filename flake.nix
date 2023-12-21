@@ -37,13 +37,13 @@
       };
 
       switch = pkgs.writeShellScript "switch.sh" ''
-        cd Configurations/
+        cd $PWD/Configurations/
         git fetch
         git checkout ${rev}
 
         cd ../
 
-        cd Marlin
+        cd $PWD/Marlin
         git fetch
         git checkout ${rev}
       '';
