@@ -1,6 +1,10 @@
 {
   description = "My marlin config for Anycubic i3 Mega";
 
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
   outputs = {
     self,
     nixpkgs,
@@ -19,7 +23,6 @@
         f {
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [(import ./overlay.nix)];
           };
         });
   in {
@@ -27,15 +30,15 @@
       default = pkgs.callPackage ./marlin.nix {
         pioEnv = "trigorilla_pro";
         rev = "2.1.2.1";
-        configs = pkgs.callPackage ./local_configs.nix {};
+        configs = ./configs;
       };
     });
 
-    # devShells = forAllSystems ({pkgs}: {
-    #   default = pkgs.mkShell {
-    #     packages = import ./pkgs.nix {inherit pkgs;};
-    #   };
-    # });
+    devShells = forAllSystems ({pkgs}: {
+      default = pkgs.mkShell {
+        packages = [pkgs.platformio];
+      };
+    });
 
     formatter = forAllSystems ({pkgs, ...}: pkgs.alejandra);
   };
