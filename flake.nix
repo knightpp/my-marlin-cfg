@@ -25,13 +25,28 @@
             inherit system;
           };
         });
+
+    rev = "2.1.2.1";
   in {
     packages = forAllSystems ({pkgs}: {
       default = pkgs.callPackage ./marlin.nix {
+        inherit rev;
+
         pioEnv = "trigorilla_pro";
-        rev = "2.1.2.1";
         configs = ./configs;
       };
+
+      switch = pkgs.writeShellScript "switch.sh" ''
+        cd Configurations/
+        git fetch
+        git checkout ${rev}
+
+        cd ../
+
+        cd Marlin
+        git fetch
+        git checkout ${rev}
+      '';
     });
 
     devShells = forAllSystems ({pkgs}: {
