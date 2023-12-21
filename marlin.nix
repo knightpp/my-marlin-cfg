@@ -15,7 +15,7 @@ stdenv.mkDerivation {
     owner = "MarlinFirmware";
     repo = "Marlin";
     rev = rev;
-    sha256 = lib.fakeSHA256;
+    sha256 = "sha256-UvpWzozPVMODzXhswfkdrlF7SGUlaa5ZxrzQNuHlOlM=";
   };
 
   nativeBuildInputs = [platformio];
