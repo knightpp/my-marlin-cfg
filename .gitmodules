@@ -1,0 +1,6 @@
+[submodule "Configurations"]
+	path = Configurations
+	url = https://github.com/MarlinFirmware/Configurations.git
+[submodule "Marlin"]
+	path = Marlin
+	url = https://github.com/MarlinFirmware/Marlin.git
