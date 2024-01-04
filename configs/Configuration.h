@@ -704,11 +704,11 @@
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
   // Measured physical constants from M306
-  #define MPC_BLOCK_HEAT_CAPACITY { 10.17f }          // (J/K) Heat block heat capacities.
-  #define MPC_SENSOR_RESPONSIVENESS { 0.0979f }       // (K/s per ∆K) Rate of change of sensor temperature from heat block.
-  #define MPC_AMBIENT_XFER_COEFF { 0.0817f }          // (W/K) Heat transfer coefficients from heat block to room air with fan off.
+  #define MPC_BLOCK_HEAT_CAPACITY { 14.23f }          // (J/K) Heat block heat capacities.
+  #define MPC_SENSOR_RESPONSIVENESS { 0.2200f }       // (K/s per ∆K) Rate of change of sensor temperature from heat block.
+  #define MPC_AMBIENT_XFER_COEFF { 0.1195f }          // (W/K) Heat transfer coefficients from heat block to room air with fan off.
   #if ENABLED(MPC_INCLUDE_FAN)
-    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1269f } // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
+    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1653f } // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
   #endif
 
   // For one fan and multiple hotends MPC needs to know how to apply the fan cooling effect.
@@ -1180,7 +1180,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.2 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 100.93 }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -2236,14 +2236,14 @@
 // Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_HOTEND 190
+#define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_TEMP_CHAMBER 35
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "ABS"
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
+#define PREHEAT_2_LABEL       "PETG"
+#define PREHEAT_2_TEMP_HOTEND 230
+#define PREHEAT_2_TEMP_BED    70
 #define PREHEAT_2_TEMP_CHAMBER 35
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 

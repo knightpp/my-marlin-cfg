@@ -302,8 +302,8 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD 40        // Seconds
-  #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
+  #define THERMAL_PROTECTION_PERIOD 80        // Seconds
+  #define THERMAL_PROTECTION_HYSTERESIS 15     // Degrees Celsius
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
@@ -1721,7 +1721,7 @@
   //#define CONFIGURATION_EMBEDDING
 
   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
-  //#define BINARY_FILE_TRANSFER
+  #define BINARY_FILE_TRANSFER
 
   #if ENABLED(BINARY_FILE_TRANSFER)
     // Include extra facilities (e.g., 'M20 F') supporting firmware upload via BINARY_FILE_TRANSFER
