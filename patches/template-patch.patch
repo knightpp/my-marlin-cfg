@@ -1,0 +1,73 @@
+diff --git a/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration.h b/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration.h
+index b2c841b146..97c23db42f 100644
+--- a/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration.h	
++++ b/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration.h	
+@@ -704,11 +704,11 @@
+   #define MPC_INCLUDE_FAN                             // Model the fan speed?
+ 
+   // Measured physical constants from M306
+-  #define MPC_BLOCK_HEAT_CAPACITY { 10.17f }          // (J/K) Heat block heat capacities.
+-  #define MPC_SENSOR_RESPONSIVENESS { 0.0979f }       // (K/s per ∆K) Rate of change of sensor temperature from heat block.
+-  #define MPC_AMBIENT_XFER_COEFF { 0.0817f }          // (W/K) Heat transfer coefficients from heat block to room air with fan off.
++  #define MPC_BLOCK_HEAT_CAPACITY { 14.23f }          // (J/K) Heat block heat capacities.
++  #define MPC_SENSOR_RESPONSIVENESS { 0.2200f }       // (K/s per ∆K) Rate of change of sensor temperature from heat block.
++  #define MPC_AMBIENT_XFER_COEFF { 0.1195f }          // (W/K) Heat transfer coefficients from heat block to room air with fan off.
+   #if ENABLED(MPC_INCLUDE_FAN)
+-    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1269f } // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
++    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1653f } // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
+   #endif
+ 
+   // For one fan and multiple hotends MPC needs to know how to apply the fan cooling effect.
+@@ -1180,7 +1180,7 @@
+  * Override with M92
+  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
+  */
+-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.2 }
++#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 100.93 }
+ 
+ /**
+  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
+@@ -2236,14 +2236,14 @@
+ // Preheat Constants - Up to 10 are supported without changes
+ //
+ #define PREHEAT_1_LABEL       "PLA"
+-#define PREHEAT_1_TEMP_HOTEND 180
+-#define PREHEAT_1_TEMP_BED     70
++#define PREHEAT_1_TEMP_HOTEND 190
++#define PREHEAT_1_TEMP_BED     60
+ #define PREHEAT_1_TEMP_CHAMBER 35
+ #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+ 
+-#define PREHEAT_2_LABEL       "ABS"
+-#define PREHEAT_2_TEMP_HOTEND 240
+-#define PREHEAT_2_TEMP_BED    110
++#define PREHEAT_2_LABEL       "PETG"
++#define PREHEAT_2_TEMP_HOTEND 230
++#define PREHEAT_2_TEMP_BED    70
+ #define PREHEAT_2_TEMP_CHAMBER 35
+ #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+ 
+diff --git a/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration_adv.h b/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration_adv.h
+index 1e8500ebda..7f34091000 100644
+--- a/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration_adv.h	
++++ b/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32/Configuration_adv.h	
+@@ -302,8 +302,8 @@
+  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
+  */
+ #if ENABLED(THERMAL_PROTECTION_HOTENDS)
+-  #define THERMAL_PROTECTION_PERIOD 40        // Seconds
+-  #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
++  #define THERMAL_PROTECTION_PERIOD 80        // Seconds
++  #define THERMAL_PROTECTION_HYSTERESIS 15     // Degrees Celsius
+ 
+   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
+   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
+@@ -1721,7 +1721,7 @@
+   //#define CONFIGURATION_EMBEDDING
+ 
+   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
+-  //#define BINARY_FILE_TRANSFER
++  #define BINARY_FILE_TRANSFER
+ 
+   #if ENABLED(BINARY_FILE_TRANSFER)
+     // Include extra facilities (e.g., 'M20 F') supporting firmware upload via BINARY_FILE_TRANSFER
