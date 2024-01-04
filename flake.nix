@@ -27,25 +27,33 @@
         });
 
     rev = "2.1.2.1";
+    marlinHash = "sha256-UvpWzozPVMODzXhswfkdrlF7SGUlaa5ZxrzQNuHlOlM=";
+    configTemplatePath = "Configurations/config/examples/AnyCubic/i3 Mega/Trigorilla Pro STM32";
+    pioEnv = "trigorilla_pro";
   in {
     packages = forAllSystems ({pkgs}: {
       default = pkgs.callPackage ./marlin.nix {
         inherit rev;
-
-        pioEnv = "trigorilla_pro";
+        inherit pioEnv;
+        hash = marlinHash;
         configs = ./configs;
       };
 
-      switch = pkgs.writeShellScript "switch.sh" ''
+      genPatches = pkgs.writeShellScriptBin "gen-patches.sh" ''
+        cp $PWD/Marlin/Marlin/Configuration*.h $PWD/configs
+        git add $PWD/configs
+        git commit -m "update configs"
+
+        cp $PWD/configs/* "$PWD/${configTemplatePath}/"
         cd $PWD/Configurations/
-        git fetch
-        git checkout ${rev}
+        git diff --patch > $PWD/../patches/template-patch.patch
+        git reset --hard HEAD
+      '';
 
-        cd ../
-
+      build = pkgs.writeShellScriptBin "builds.sh" ''
         cd $PWD/Marlin
-        git fetch
-        git checkout ${rev}
+        ${pkgs.platformio}/bin/pio run --environment ${pioEnv}
+        cp .pio/build/${pioEnv}/firmware.* ../
       '';
     });
 

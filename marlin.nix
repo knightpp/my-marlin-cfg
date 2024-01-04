@@ -5,7 +5,8 @@
   platformio,
   configs,
   pioEnv ? "trigorilla_pro",
-  rev ? "2.1.2.1",
+  rev,
+  hash,
 }:
 stdenv.mkDerivation {
   pname = "marlin-firmware-${pioEnv}";
@@ -14,8 +15,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "MarlinFirmware";
     repo = "Marlin";
-    rev = rev;
-    sha256 = "sha256-UvpWzozPVMODzXhswfkdrlF7SGUlaa5ZxrzQNuHlOlM=";
+    inherit rev;
+    sha256 = hash;
   };
 
   nativeBuildInputs = [platformio];
@@ -25,12 +26,11 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    pio run --target build --environment ${pioEnv}
+    pio run --environment ${pioEnv}
   '';
 
   installPhase = ''
-    ls -l .pio/build/
-    exit 1
+    cp .pio/build/${pioEnv}/firmware.* $out
   '';
 
   meta = with lib; {
